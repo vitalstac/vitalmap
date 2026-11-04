@@ -4,6 +4,16 @@
 
 # Ordnerstruktur für das Repository ist bereits erstellt.
 
+# Einteilung der Aufgaben: 
+```
+STAC Extensions   <- Emily 
+Backend/STAC-API  <- Khanh Giang und Paul 
+KI-Agent          <- Timo und Lukas 
+Frontend          <- Alle können daran am Ende arbeiten
+```
+## Aufgaben sind eingeteilt, jedoch kann es sich jederzeit leicht ändern.  
+
+
 **Vorsicht beim Commit!**
 
 Bitte darauf achten, dass auf dem Branch Develop das gesamte Projekt programmiert wird. 
