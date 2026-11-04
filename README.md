@@ -7,7 +7,7 @@
 # Einteilung der Aufgaben: 
 ```
 STAC Extensions   <- Emily 
-Backend/STAC-API  <- Khanh Giang und Paul 
+Backend/STAC-API  <- Giang und Paul 
 KI-Agent          <- Timo und Lukas 
 Frontend          <- Alle können daran am Ende arbeiten
 ```
