@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vitalstac.github.io/vitalmap/schemas/chat-request.schema.json",
+  "title": "ChatRequest",
+  "description": "Request-Payload von der Web-App an den SSE-Endpunkt POST /api/agent/chat.",
+  "type": "object",
+  "required": ["session_id", "message", "lang", "context"],
+  "additionalProperties": false,
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Eindeutige Session-ID (thread_id im LangGraph-Checkpointer)."
+    },
+    "message": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Nutzerfrage in natürlicher Sprache."
+    },
+    "lang": {
+      "type": "string",
+      "enum": ["de", "en"],
+      "default": "de",
+      "description": "Aktuelle Oberflächensprache."
+    },
+    "context": {
+      "type": "object",
+      "required": ["bbox", "zoom", "layers", "datasets", "selected", "filters", "datetime"],
+      "additionalProperties": false,
+      "properties": {
+        "bbox": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "Aktueller Kartenausschnitt [west, south, east, north] in EPSG:4326."
+        },
+        "zoom": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 24,
+          "description": "Aktuelle Zoomstufe der Karte."
+        },
+        "layers": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "IDs der aktuell auf der Karte aktiven Layer."
+        },
+        "datasets": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Collection-IDs der aktuell in der Ergebnisliste geladenen Datensätze."
+        },
+        "selected": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Collection-IDs der aktuell vom Nutzer ausgewählten Datensätze."
+        },
+        "filters": {
+          "type": "object",
+          "description": "Aktive Filter aus der Oberfläche (z. B. CQL2-JSON oder Facetten)."
+        },
+        "datetime": {
+          "type": ["string", "null"],
+          "description": "Aktiver Zeitraum als ISO-8601-Intervall (z. B. 2020-01-01/2023-12-31) oder null."
+        }
+      }
+    }
+  }
+}
