@@ -1,0 +1,23 @@
+{
+    "name": "stac-health-extension",
+    "version": "0.1.0",
+    "description": "STAC Health Extension for STAC Items and STAC Collections",
+    "scripts": {
+        "validate": "stac-node-validator --schema schema.json collection.json item.json"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com"
+    },
+    "keywords": [
+        "stac",
+        "stac-extension",
+        "health",
+        "iso-19115",
+        "dcat"
+    ],
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "stac-node-validator": "^2.1.0"
+    }
+}
