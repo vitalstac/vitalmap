@@ -3,7 +3,7 @@
     "id": "health-regional-indicators",
     "stac_version": "1.0.0",
     "stac_extensions": [
-        "https://github.io"
+        "https://vitalstac.github.io/health/v0.1.0/schema.json"
     ],
     "title": "Regionale Gesundheitsindikatoren",
     "description": "Kontinuierlich aktualisierte Zeitreihen zu regionalen  Gesundheitsdaten.",
@@ -22,10 +22,22 @@
     ],
     "extent": {
         "spatial": {
-            "bbox": [[5.866, 47.270, 15.042, 55.058]]
+            "bbox": [
+                [
+                    5.866,
+                    47.270,
+                    15.042,
+                    55.058
+                ]
+            ]
         },
         "temporal": {
-            "interval": [["2024-01-01T00:00:00Z", null]]
+            "interval": [
+                [
+                    "2024-01-01T00:00:00Z",
+                    null
+                ]
+            ]
         }
     },
     "links": [
@@ -36,9 +48,8 @@
         },
         {
             "rel": "self",
-            "href":"./collection.json",
+            "href": "./collection.json",
             "type": "application/json"
         }
     ]
-
 }

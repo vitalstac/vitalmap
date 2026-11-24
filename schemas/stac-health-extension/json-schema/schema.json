@@ -1,6 +1,6 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://stac-extensions.github.io/health/v0.1.0/schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://vitalstac.github.io/health/v0.1.0/schema.json",
     "title": "STAC Health Extension",
     "description": "STAC Health Extension for STAC Items and STAC Collections",
     "oneOf": [
@@ -12,9 +12,14 @@
                 },
                 {
                     "type": "object",
-                    "required": ["type", "properties"],
+                    "required": [
+                        "type",
+                        "properties"
+                    ],
                     "properties": {
-                        "type": { "const": "Feature"},
+                        "type": {
+                            "const": "Feature"
+                        },
                         "properties": {
                             "$ref": "#/definitions/fields"
                         }
@@ -37,7 +42,9 @@
                         "health:representation_type"
                     ],
                     "properties": {
-                        "type": { "const": "Collection" }
+                        "type": {
+                            "const": "Collection"
+                        }
                     }
                 },
                 {
@@ -45,17 +52,18 @@
                 }
             ]
         }
-
     ],
     "definitions": {
         "stac_extensions": {
             "type": "object",
-            "required": ["stac_extensions"],
+            "required": [
+                "stac_extensions"
+            ],
             "properties": {
                 "stac_extensions": {
                     "type": "array",
                     "contains": {
-                        "const": "https://github.io"
+                        "const": "https://vitalstac.github.io/health/v0.1.0/schema.json"
                     }
                 }
             }
@@ -103,26 +111,40 @@
                     ]
                 },
                 "health:representation_type": {
-                    "type": "array", 
+                    "type": "array",
                     "minItems": 1,
                     "maxItems": 2,
                     "uniqueItems": true,
                     "oneOf": [
                         {
                             "maxItems": 1,
-                            "items": {"$ref": "#/definitions/spatial_codes"}
+                            "items": {
+                                "$ref": "#/definitions/spatial_codes"
+                            }
                         },
                         {
                             "minItems": 2,
                             "maxItems": 2,
                             "allOf": [
-                                {"contains": {"$ref": "#/definitions/spatial_codes"}},
-                                {"contains": {"const": "timeSeries"}}
+                                {
+                                    "contains": {
+                                        "$ref": "#/definitions/spatial_codes"
+                                    }
+                                },
+                                {
+                                    "contains": {
+                                        "const": "timeSeries"
+                                    }
+                                }
                             ],
                             "items": {
                                 "anyOf": [
-                                    {"$ref": "#/definitions/spatial_codes"},
-                                    {"const": "timeSeries"}
+                                    {
+                                        "$ref": "#/definitions/spatial_codes"
+                                    },
+                                    {
+                                        "const": "timeSeries"
+                                    }
                                 ]
                             }
                         }
@@ -141,7 +163,7 @@
                     "minimum": 1
                 },
                 "health:format": {
-                    "type" : "array",
+                    "type": "array",
                     "uniqueItems": true,
                     "items": {
                         "type": "string",
@@ -166,15 +188,40 @@
             "allOf": [
                 {
                     "if": {
-                        "required": ["health:representation_type"],
+                        "required": [
+                            "health:representation_type"
+                        ],
                         "properties": {
                             "health:representation_type": {
-                                "contains": {"const": "timeSeries"}
+                                "contains": {
+                                    "const": "timeSeries"
+                                }
                             }
                         }
                     },
                     "then": {
-                        "required": ["health:temporal_resolution"]
+                        "required": [
+                            "health:temporal_resolution"
+                        ]
+                    }
+                },
+                {
+                    "if": {
+                        "required": [
+                            "health:representation_type"
+                        ],
+                        "properties": {
+                            "health:representation_type": {
+                                "contains": {
+                                    "const": "grid"
+                                }
+                            }
+                        }
+                    },
+                    "then": {
+                        "required": [
+                            "health:spatial_resolution"
+                        ]
                     }
                 }
             ]
