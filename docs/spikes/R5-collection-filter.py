@@ -8,7 +8,7 @@ S, R, U = "health:status", "health:representation_type", "health:update_frequenc
 
 def make(cid, status, rep, freq, kw):
     """Build a minimal test collection with three health fields."""
-    return {"type": "Collection", "stac_version": "1.0.0", "id": cid, "title": cid,
+    return {"type": "Collection", "stac_version": "1.0.0", "id": cid, "title": cid, "stac_extensions": ["https://stac-extensions.github.io/health/v0.1.0/schema.json"],
             "description": "Spike " + cid, "license": "CC0-1.0", "keywords": kw,
             S: status, R: rep, U: freq,
             "extent": {"spatial": {"bbox": [[5.9, 50.3, 9.5, 52.5]]},
