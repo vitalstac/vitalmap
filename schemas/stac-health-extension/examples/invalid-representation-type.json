@@ -1,0 +1,38 @@
+{
+    "type": "Collection",
+    "id": "invalid-representation-type",
+    "stac_version": "1.0.0",
+    "stac_extensions": [
+        "https://vitalstac.github.io/health/v0.1.0/schema.json"
+    ],
+    "title": "Ungültige Kombination zweier räumlicher Codes",
+    "description": "Negativbeispiel: grid und vector dürfen nicht kombiniert werden.",
+    "license": "CC-BY-4.0",
+    "health:status": "completed",
+    "health:update_frequency": "notPlanned",
+    "health:representation_type": [
+        "grid",
+        "vector"
+    ],
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [
+                    5.866,
+                    47.270,
+                    15.042,
+                    55.058
+                ]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "2023-01-01T00:00:00Z",
+                    "2023-12-31T23:59:59Z"
+                ]
+            ]
+        }
+    },
+    "links": []
+}

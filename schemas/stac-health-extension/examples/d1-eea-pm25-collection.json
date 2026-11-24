@@ -1,0 +1,52 @@
+{
+    "type": "Collection",
+    "id": "eea-pm25-annual-mean",
+    "stac_version": "1.0.0",
+    "stac_extensions": [
+        "https://vitalstac.github.io/health/v0.1.0/schema.json"
+    ],
+    "title": "PM2.5-Jahresmittel, interpolierte Karten, Europa, 2020-2023, 1km",
+    "description": "Interpolierte Karten des PM2.5-Jahresmittels für Europa (2020-2023) in 1 km Auflösung. Quelle: European Environment Agency (EEA), KBS: EPSG:3035.",
+    "license": "CC-BY-4.0",
+    "health:status": "completed",
+    "health:update_frequency": "annually",
+    "health:representation_type": [
+        "grid"
+    ],
+    "health:spatial_resolution": 1000,
+    "health:format": [
+        "COG"
+    ],
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [
+                    -25.0,
+                    34.0,
+                    45.0,
+                    72.0
+                ]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "2020-01-01T00:00:00Z",
+                    "2023-12-31T23:59:29Z"
+                ]
+            ]
+        }
+    },
+    "links": [
+        {
+            "rel": "root",
+            "href": "./d1-eea-pm25-collection.json",
+            "type": "application/json"
+        },
+        {
+            "rel": "self",
+            "href": "./d1-eea-pm25-collection.json",
+            "type": "application/json"
+        }
+    ]
+}
