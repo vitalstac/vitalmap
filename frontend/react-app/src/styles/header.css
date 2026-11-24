@@ -1,0 +1,78 @@
+.header {
+    grid-area: header;
+    font: Verdana;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 0 18px;
+    background: var(--brand-d);
+    color: #fff;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+  }
+  .brand-sub {
+    color: rgba(255, 255, 255, .75);
+    font-size: 14px;
+    margin-left: 6px;
+  }
+
+  .mode-switch {
+    display: flex;
+    gap: 2px;
+    border: 1px solid rgba(255, 255, 255, .4);
+    border-radius: 99px;
+    padding: 3px;
+  }
+  .mode-switch button {
+    border: 0;
+    background: transparent;
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 99px;
+    font-weight: 600;
+  }
+  .mode-switch button[aria-selected="true"] {
+    background: #fff;
+    color: var(--brand-d);
+  }
+  
+  .header-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+  }
+  .header-right .plain {
+    color: #fff;
+  }
+  
+  .lang {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, .4);
+    border-radius: 99px;
+    padding: 3px;
+  }
+  .lang span {
+    display: none;
+  }
+  .lang button {
+    border: 0;
+    background: transparent;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 99px;
+    font-weight: 600;
+  }
+  .lang button[aria-pressed="true"] {
+    background: #fff;
+    color: var(--brand-d);
+  }
+  .header :focus-visible {
+    outline-color: #fff;
+  }

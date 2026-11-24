@@ -1,0 +1,89 @@
+.results {
+  grid-area: results;
+  background: var(--surface);
+  border-left: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  min-height: 0;
+  overflow-y: auto;
+}
+.results-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.sort select {
+  border: 0;
+  background: none;
+  color: var(--muted);
+}
+.result-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.result-card {
+  display: flex;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+.result-card.selected {
+  border: 2px solid var(--brand);
+  padding: 11px;
+}
+.thumb {
+  width: 64px;
+  height: 64px;
+  flex: none;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: linear-gradient(135deg, #2a3563, #8a8671 55%, #ecd94f);
+}
+.result-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.result-body h3 {
+  font-size: 15px;
+  font-weight: 700;
+}
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.badge {
+  background: var(--tag);
+  color: var(--tag-t);
+  border-radius: 99px;
+  padding: 1px 9px;
+  font-size: 12px;
+}
+.badge:nth-child(n+2) {
+  background: var(--tag2);
+  color: var(--tag2-t);
+}
+.result-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+.collapse {
+  font-size: 18px;
+  padding: 2px 8px;
+  color: var(--brand);
+}
+.results[data-collapsed="true"] {
+  padding: 18px 0;
+  align-items: center;
+}
+.results[data-collapsed="true"] .results-head {
+  justify-content: center;
+}

@@ -1,0 +1,110 @@
+.map {
+  grid-area: map;
+  position: relative;
+  overflow: hidden;
+  min-height: 280px;
+  background-color: var(--map);
+  background-image: repeating-linear-gradient(135deg, transparent 0 12px, rgba(127,127,127,.07) 12px 14px);
+}
+
+.zoom {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.zoom button {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: none;
+  font-size: 20px;
+}
+.zoom button + button {
+  border-top: 1px solid var(--line);
+}
+
+.layers {
+  top: 18px;
+  right: 18px;
+  width: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.layers h3, .legend h3 {
+  font-size: 16px;
+  font-weight: 700;
+}
+.opacity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 22px;
+  color: var(--muted);
+}
+.opacity input {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--brand);
+}
+.year {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 22px;
+  color: var(--muted);
+}
+.year button {
+  border: 0;
+  background: none;
+  padding: 0 4px;
+  color: var(--brand);
+  font-weight: 700;
+}
+.year strong {
+  color: var(--text);
+}
+
+.legend {
+  right: 18px;
+  bottom: 18px;
+  width: 262px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.legend-bar {
+  height: 12px;
+  border-radius: 3px;
+  margin-top: 6px;
+  background: linear-gradient(90deg, #1f2a5c, #8a8671 50%, #f0dc4d);
+}
+.legend-scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.series {
+  grid-area: series;
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  padding: 12px 18px 12px;
+}
+.series-head {
+  text-align: left;
+  font-size: 14px;
+}
+.series svg {
+  display: block;
+  width: 100%;
+  height: 56px;
+  margin-top: 8px;
+  color: var(--brand);
+}
