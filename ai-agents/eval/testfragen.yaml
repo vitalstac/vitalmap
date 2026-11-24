@@ -1,0 +1,142 @@
+# Testfragenkatalog des VitalMap-Agenten
+#
+# Pflichtenheft: US-AGT-01 (mind. 12 von 15 STAC-Anfragen korrekt),
+# US-AGT-04 (5 Fallenfragen ohne erfundenen Datensatz), Abschnitt 5.1
+# (Antwortzeiten werden mit denselben 15 Fragen gemessen) und 5.4.
+#
+# Aufbau einer Frage:
+#   id, kategorie (raeumlich | zeitlich | thematisch | kombiniert | falle), frage
+#   erwartet:
+#     bbox: Schlüssel aus "orte"; Vergleich über Überlappung (IoU >= min_iou)
+#     datetime: Intervall, tagesgenau verglichen
+#     filter_enthaelt: Liste von {feld, wert}, die im CQL2-Filter stehen müssen
+#     collections_enthalten: Collection-IDs, die in den Ergebnissen vorkommen müssen
+#     keine_treffer: true -> Fallenfrage
+#
+# WICHTIG: Die erwarteten Collections beruhen auf Abschnitt 3.9 im Pflichtenheft.
+# Vor dem ersten Lauf gegen die echten Collections prüfen (v. a. Zeiträume
+# von D3 und D5) und bei Bedarf anpassen. Änderungen am Katalog bitte als
+# eigenen Pull Request, damit die Ergebnisse vergleichbar bleiben.
+
+version: 1
+min_bestanden: 12
+
+# Alle Collection-IDs des Beispielkatalogs (Pflichtenheft 3.9).
+katalog_ids:
+  - eea-pm25-annual-mean            # D1 PM2.5, Raster, 2020-2023
+  - worldpop-deu-population         # D2 Bevölkerung, Raster, 2020
+  - dwd-hot-days-annual             # D3 heiße Tage, Raster, jährlich
+  - rki-covid19-incidence-districts # D4 COVID-19-Inzidenz, Zeitreihe
+  - inkar-gp-density-districts      # D5 Hausärzte, Vektor
+  - osm-hospitals-nrw               # D6 Krankenhäuser NRW, Punkte
+
+# Ungefähre BBoxen (West, Süd, Ost, Nord) aus den Verwaltungsgrenzen. Nominatim
+# liefert leicht andere Grenzen; deshalb der Vergleich über die Überlappung.
+orte:
+  nrw: [5.87, 50.32, 9.47, 52.53]
+  muenster: [7.48, 51.84, 7.78, 52.06]
+  kreis_steinfurt: [7.10, 51.99, 8.03, 52.48]
+  bielefeld: [8.38, 51.92, 8.67, 52.12]
+
+fragen:
+  # --- räumlich ----------------------------------------------------------
+  - id: R1
+    kategorie: raeumlich
+    frage: Welche Datensätze gibt es für den Kreis Steinfurt?
+    erwartet:
+      bbox: kreis_steinfurt
+      collections_enthalten: [osm-hospitals-nrw, inkar-gp-density-districts]
+
+  - id: R2
+    kategorie: raeumlich
+    frage: Wo liegen Krankenhäuser in Münster?
+    erwartet:
+      bbox: muenster
+      collections_enthalten: [osm-hospitals-nrw]
+
+  - id: R3
+    kategorie: raeumlich
+    frage: Zeig mir die Bevölkerungsverteilung in Bielefeld.
+    erwartet:
+      bbox: bielefeld
+      collections_enthalten: [worldpop-deu-population]
+
+  # --- zeitlich ----------------------------------------------------------
+  - id: Z1
+    kategorie: zeitlich
+    frage: Welche Daten gibt es für das Jahr 2020?
+    erwartet:
+      datetime: 2020-01-01/2020-12-31
+      collections_enthalten: [eea-pm25-annual-mean, worldpop-deu-population]
+
+  - id: Z2
+    kategorie: zeitlich
+    frage: Welche PM2.5-Daten gibt es für 2022?
+    erwartet:
+      datetime: 2022-01-01/2022-12-31
+      collections_enthalten: [eea-pm25-annual-mean]
+
+  # --- thematisch --------------------------------------------------------
+  - id: T1
+    kategorie: thematisch
+    frage: Welche Datensätze zur Luftqualität gibt es?
+    erwartet:
+      collections_enthalten: [eea-pm25-annual-mean]
+
+  - id: T2
+    kategorie: thematisch
+    frage: Gibt es Daten zur hausärztlichen Versorgung?
+    erwartet:
+      collections_enthalten: [inkar-gp-density-districts]
+
+  - id: T3
+    kategorie: thematisch
+    frage: Zeig mir nur laufend aktualisierte Zeitreihen.
+    erwartet:
+      # Filter aus Pflichtenheft 3.7
+      filter_enthaelt:
+        - {feld: "health:status", wert: onGoing}
+        - {feld: "health:representation_type", wert: timeSeries}
+      collections_enthalten: [rki-covid19-incidence-districts]
+
+  - id: T4
+    kategorie: thematisch
+    frage: Welche Daten beschreiben die Hitzebelastung?
+    erwartet:
+      collections_enthalten: [dwd-hot-days-annual]
+
+  # --- kombiniert ---------------------------------------------------------
+  - id: K1
+    kategorie: kombiniert
+    # Beispiel aus den Akzeptanzkriterien von US-AGT-01
+    frage: Welche Datensätze zeigen PM2.5 in NRW für 2020–2023?
+    erwartet:
+      bbox: nrw
+      datetime: 2020-01-01/2023-12-31
+      collections_enthalten: [eea-pm25-annual-mean]
+
+  # --- Fallenfragen (Daten sind NICHT im Katalog) ------------------------------
+  - id: F1
+    kategorie: falle
+    frage: Gibt es Daten zu Masernfällen in Bayern?
+    erwartet: {keine_treffer: true}
+
+  - id: F2
+    kategorie: falle
+    frage: Zeig mir den Datensatz „Krebsregister NRW 2019“.
+    erwartet: {keine_treffer: true}
+
+  - id: F3
+    kategorie: falle
+    frage: Wo finde ich Feinstaubwerte für Tokio?
+    erwartet: {keine_treffer: true}
+
+  - id: F4
+    kategorie: falle
+    frage: Gib mir den Download-Link zum RKI-Datensatz über Grippefälle.
+    erwartet: {keine_treffer: true}
+
+  - id: F5
+    kategorie: falle
+    frage: Welche Daten gibt es zur Pollenbelastung im Jahr 2024?
+    erwartet: {keine_treffer: true}
