@@ -1,0 +1,59 @@
+services:
+  database:
+    image: ghcr.io/stac-utils/pgstac:v0.9.11
+    environment:
+      PGSTAC_VERSION: "0.9.11"
+      POSTGRES_USER: ${POSTGRES_USER:-username}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_DB: ${POSTGRES_DB:-postgis}
+      PGUSER: ${POSTGRES_USER:-username}
+      PGPASSWORD: ${POSTGRES_PASSWORD:-password}
+      PGDATABASE: ${POSTGRES_DB:-postgis}
+    ports:
+      - "5439:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-username} -d ${POSTGRES_DB:-postgis}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  stac-api:
+    image: ghcr.io/stac-utils/stac-fastapi-pgstac:7.1.0
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      PGUSER: ${POSTGRES_USER:-username}
+      PGPASSWORD: ${POSTGRES_PASSWORD:-password}
+      PGDATABASE: ${POSTGRES_DB:-postgis}
+      PGHOST: database
+      PGPORT: 5432
+      DB_MIN_CONN_SIZE: 1
+      DB_MAX_CONN_SIZE: 1
+      # Only for the spike: allows POSTing collections. Remove later (the catalog is read-only).
+      ENABLE_TRANSACTIONS_EXTENSIONS: "TRUE"
+    command: uvicorn stac_fastapi.pgstac.app:create_app --factory --host 0.0.0.0 --port 8080
+    ports:
+      - "8080:8080"
+
+  tiler:
+    image: ghcr.io/stac-utils/titiler-pgstac:3.2.0
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      PGUSER: ${POSTGRES_USER:-username}
+      PGPASSWORD: ${POSTGRES_PASSWORD:-password}
+      PGDATABASE: ${POSTGRES_DB:-postgis}
+      PGHOST: database
+      PGPORT: 5432
+      DB_MIN_CONN_SIZE: 1
+      DB_MAX_CONN_SIZE: 10
+    command: uvicorn titiler.pgstac.main:app --host 0.0.0.0 --port 8082
+    ports:
+      - "8082:8082"
+
+volumes:
+  pgdata:
