@@ -1,0 +1,65 @@
+{
+    "type": "Feature",
+    "stac_version": "1.0.0",
+    "stac_extensions": [
+        "https://vitalstac.github.io/health/v0.1.0/schema.json"
+    ],
+    "id": "health-regional-indicators-2026-w47",
+    "collection": "health-example-collection",
+    "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+            [
+                [
+                    7.5,
+                    51.9
+                ],
+                [
+                    7.7,
+                    51.9
+                ],
+                [
+                    7.7,
+                    52.0
+                ],
+                [
+                    7.5,
+                    52.0
+                ],
+                [
+                    7.5,
+                    51.9
+                ]
+            ]
+        ]
+    },
+    "bbox": [
+        7.5,
+        51.9,
+        7.7,
+        52.0
+    ],
+    "properties": {
+        "datetime": "2026-11-23T00:00:00Z",
+        "health:status": "completed",
+        "health:format": [
+            "CSV"
+        ]
+    },
+    "links": [
+        {
+            "rel": "collection",
+            "href": "./collection.js",
+            "type": "application/json"
+        }
+    ],
+    "assets": {
+        "table": {
+            "href": "https://example.org",
+            "type": "test/csv",
+            "roles": [
+                "data"
+            ]
+        }
+    }
+}
