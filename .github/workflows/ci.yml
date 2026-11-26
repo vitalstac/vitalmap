@@ -1,0 +1,58 @@
+name: CI - Linting & Typecheck
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+
+jobs:
+  python-lint:
+    name: Python (Ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Ruff
+        run: pipx install ruff
+
+      - name: Run Ruff linter (E, F, I, B, UP)
+        run: |
+          if find ai-agents backend -name "*.py" 2>/dev/null | grep -q .; then
+            ruff check --select E,F,I,B,UP ai-agents backend
+          else
+            echo "Noch keine Python-Dateien vorhanden – übersprungen."
+          fi
+
+      - name: Run Ruff format check
+        run: |
+          if find ai-agents backend -name "*.py" 2>/dev/null | grep -q .; then
+            ruff format --check ai-agents backend
+          else
+            echo "Noch keine Python-Dateien vorhanden – übersprungen."
+          fi
+
+  frontend-lint:
+    name: Frontend (TypeScript, ESLint, Prettier)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend/react-app
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies & run checks
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+            npx tsc --noEmit
+            npm run lint
+            npx prettier --check .
+          else
+            echo "Noch keine package.json im Frontend – übersprungen."
+          fi
