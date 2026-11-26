@@ -1,0 +1,76 @@
+{
+  "type": "Collection",
+  "stac_version": "1.1.0",
+  "id": "dwd-hot-days-annual",
+  "title": "Number of hot days (Tmax >= 30 °C) per year, Germany, 1 km",
+  "description": "Annual number of hot days with a daily maximum temperature of at least 30 °C on a 1 km grid for Germany (heat stress), Deutscher Wetterdienst Climate Data Center.",
+  "keywords": [
+    "hot days",
+    "heiße Tage",
+    "Hitze",
+    "Hitzebelastung",
+    "heat",
+    "temperature",
+    "Temperatur",
+    "climate",
+    "Klima",
+    "health-cat:environmental-exposure"
+  ],
+  "license": "CC-BY-4.0",
+  "health:status": "onGoing",
+  "health:update_frequency": "annually",
+  "health:representation_type": [
+    "grid"
+  ],
+  "health:spatial_resolution": 1000,
+  "health:temporal_resolution": "P1Y",
+  "health:format": [
+    "COG"
+  ],
+  "providers": [
+    {
+      "name": "Deutscher Wetterdienst, Climate Data Center",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://opendata.dwd.de"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          5.87,
+          47.27,
+          15.04,
+          55.06
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "1951-01-01T00:00:00Z",
+          "2024-12-31T23:59:59Z"
+        ]
+      ]
+    }
+  },
+  "item_assets": {
+    "data": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data"
+      ],
+      "unit": "d"
+    }
+  },
+  "links": [
+    {
+      "rel": "license",
+      "href": "https://creativecommons.org/licenses/by/4.0/",
+      "title": "CC BY 4.0"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "type": "Collection",
+  "stac_version": "1.1.0",
+  "id": "rki-covid19-incidence-districts",
+  "title": "COVID-19 7-day incidence per district, daily",
+  "license": "CC-BY-4.0",
+  "health:status": "onGoing",
+  "health:update_frequency": "daily",
+  "health:representation_type": [
+    "textTable",
+    "timeSeries"
+  ],
+  "health:temporal_resolution": "P1D",
+  "providers": [
+    {
+      "name": "Robert Koch-Institut",
+      "roles": [
+        "producer",
+        "licensor"
+      ]
+    },
+    {
+      "name": "Zenodo",
+      "roles": [
+        "host"
+      ]
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          5.87,
+          47.27,
+          15.04,
+          55.06
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2020-03-01T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "assets": {
+    "data": {
+      "href": "https://data.example.org/rki/incidence_districts.csv",
+      "type": "text/csv",
+      "roles": [
+        "data"
+      ],
+      "unit": "{cases}/10*5",
+      "table:columns": [
+        {
+          "name": "ags",
+          "type": "string",
+          "description": "Amtlicher Gemeindeschlüssel des Kreises"
+        },
+        {
+          "name": "datum",
+          "type": "date"
+        },
+        {
+          "name": "inzidenz",
+          "type": "number",
+          "description": "7-Tage-Inzidenz"
+        }
+      ]
+    },
+    "locations": {
+      "href": "https://data.example.org/rki/districts.geojson",
+      "type": "application/geo+json",
+      "roles": [
+        "locations"
+      ]
+    }
+  },
+  "links": [
+    {
+      "rel": "license",
+      "href": "https://creativecommons.org/licenses/by/4.0/",
+      "title": "CC BY 4.0",
+      "type": "text/html"
+    }
+  ],
+  "description": "Daily COVID-19 7-day incidence per 100,000 inhabitants for German districts (Landkreise), published by the Robert Koch-Institut.",
+  "keywords": [
+    "COVID-19",
+    "Corona",
+    "incidence",
+    "Inzidenz",
+    "disease surveillance",
+    "Infektionen",
+    "Landkreise",
+    "health-cat:disease-surveillance"
+  ]
+}

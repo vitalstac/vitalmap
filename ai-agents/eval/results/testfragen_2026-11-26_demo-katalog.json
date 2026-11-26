@@ -1,0 +1,154 @@
+[
+  {
+    "id": "R1",
+    "category": "raeumlich",
+    "question": "Welche Datensätze gibt es für den Kreis Steinfurt?",
+    "passed": true,
+    "reasons": [],
+    "t_first_event": 0.0438035000115633,
+    "t_done": 3.8027373000513762,
+    "grounding_removed": 0
+  },
+  {
+    "id": "R2",
+    "category": "raeumlich",
+    "question": "Wo liegen Krankenhäuser in Münster?",
+    "passed": true,
+    "reasons": [],
+    "t_first_event": 0.003420799970626831,
+    "t_done": 2.077556800097227,
+    "grounding_removed": 0
+  },
+  {
+    "id": "R3",
+    "category": "raeumlich",
+    "question": "Zeig mir die Bevölkerungsverteilung in Bielefeld.",
+    "passed": true,
+    "reasons": [],
+    "t_first_event": 0.009140399983152747,
+    "t_done": 1.7651760999578983,
+    "grounding_removed": 0
+  },
+  {
+    "id": "Z1",
+    "category": "zeitlich",
+    "question": "Welche Daten gibt es für das Jahr 2020?",
+    "passed": true,
+    "reasons": [],
+    "t_first_event": 0.004545600153505802,
+    "t_done": 2.06842920021154,
+    "grounding_removed": 0
+  },
+  {
+    "id": "Z2",
+    "category": "zeitlich",
+    "question": "Welche PM2.5-Daten gibt es für 2022?",
+    "passed": true,
+    "reasons": [],
+    "t_first_event": 0.00816489988937974,
+    "t_done": 1.7304064000491053,
+    "grounding_removed": 0
+  },
+  {
+    "id": "T1",
+    "category": "thematisch",
+    "question": "Welche Datensätze zur Luftqualität gibt es?",
+    "passed": true,
+    "reasons": [],
+    "t_first_event": 0.005771799944341183,
+    "t_done": 1.0386822998989373,
+    "grounding_removed": 0
+  },
+  {
+    "id": "T2",
+    "category": "thematisch",
+    "question": "Gibt es Daten zur hausärztlichen Versorgung?",
+    "passed": true,
+    "reasons": [],
+    "t_first_event": 0.010263500036671758,
+    "t_done": 1.9028239999897778,
+    "grounding_removed": 0
+  },
+  {
+    "id": "T3",
+    "category": "thematisch",
+    "question": "Zeig mir nur laufend aktualisierte Zeitreihen.",
+    "passed": false,
+    "reasons": [
+      "Filter ohne health:representation_type = timeSeries"
+    ],
+    "t_first_event": 0.0028150000143796206,
+    "t_done": 2.340496900025755,
+    "grounding_removed": 0
+  },
+  {
+    "id": "T4",
+    "category": "thematisch",
+    "question": "Welche Daten beschreiben die Hitzebelastung?",
+    "passed": true,
+    "reasons": [],
+    "t_first_event": 0.0027554999105632305,
+    "t_done": 1.554342299932614,
+    "grounding_removed": 0
+  },
+  {
+    "id": "K1",
+    "category": "kombiniert",
+    "question": "Welche Datensätze zeigen PM2.5 in NRW für 2020–2023?",
+    "passed": true,
+    "reasons": [],
+    "t_first_event": 0.006875799968838692,
+    "t_done": 2.0136926998384297,
+    "grounding_removed": 0
+  },
+  {
+    "id": "F1",
+    "category": "falle",
+    "question": "Gibt es Daten zu Masernfällen in Bayern?",
+    "passed": true,
+    "reasons": [],
+    "t_first_event": 0.004229800077155232,
+    "t_done": 1.9276091000065207,
+    "grounding_removed": 0
+  },
+  {
+    "id": "F2",
+    "category": "falle",
+    "question": "Zeig mir den Datensatz „Krebsregister NRW 2019“.",
+    "passed": true,
+    "reasons": [],
+    "t_first_event": 0.01280049979686737,
+    "t_done": 3.1552389999851584,
+    "grounding_removed": 0
+  },
+  {
+    "id": "F3",
+    "category": "falle",
+    "question": "Wo finde ich Feinstaubwerte für Tokio?",
+    "passed": true,
+    "reasons": [],
+    "t_first_event": 0.007249400019645691,
+    "t_done": 3.1514590999577194,
+    "grounding_removed": 0
+  },
+  {
+    "id": "F4",
+    "category": "falle",
+    "question": "Gib mir den Download-Link zum RKI-Datensatz über Grippefälle.",
+    "passed": true,
+    "reasons": [],
+    "t_first_event": 0.02394109987653792,
+    "t_done": 4.319298799848184,
+    "grounding_removed": 0
+  },
+  {
+    "id": "F5",
+    "category": "falle",
+    "question": "Welche Daten gibt es zur Pollenbelastung im Jahr 2024?",
+    "passed": true,
+    "reasons": [],
+    "t_first_event": 0.004266900010406971,
+    "t_done": 2.7813484999351203,
+    "grounding_removed": 0
+  }
+]
