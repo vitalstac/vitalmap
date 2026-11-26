@@ -1,7 +1,7 @@
 # STAC Health Extension
 
 - **Title:** STAC Health Extension
-- **Identifier:** <https://github.io>
+- **Identifier:** <https://vitalstac.github.io/health/v0.1.0/schema.json>
 - **Field Name Prefix:** `health`
 - **Scope** Item, Collection
 - **Extension Maturity Clasification** Proposal
