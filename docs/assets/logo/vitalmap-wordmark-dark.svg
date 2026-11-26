@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-label="VitalMap – find, understand and map health data">
+  <g transform="translate(40 32) scale(0.5)">
+    <rect width="512" height="512" rx="96" fill="#0f766e"/>
+    <path d="M256 438 C196 364 132 300 132 214 A124 124 0 1 1 380 214 C380 300 316 364 256 438 Z" fill="#ffffff"/>
+    <polyline points="160,218 204,218 226,174 252,266 278,192 296,218 352,218"
+              fill="none" stroke="#0f766e" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="340" y="186" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="120" font-weight="700" fill="#e5eeed">Vital<tspan fill="#2aa89a">Map</tspan></text>
+  <text x="344" y="248" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="38" fill="#9bb0b2">Find, understand and map health data</text>
+</svg>

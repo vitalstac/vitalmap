@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="VitalMap">
+  <rect width="512" height="512" rx="96" fill="#0f766e"/>
+  <path d="M256 438 C196 364 132 300 132 214 A124 124 0 1 1 380 214 C380 300 316 364 256 438 Z" fill="#ffffff"/>
+  <polyline points="160,218 204,218 226,174 252,266 278,192 296,218 352,218"
+            fill="none" stroke="#0f766e" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
