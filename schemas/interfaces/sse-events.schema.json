@@ -1,0 +1,270 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vitalstac.github.io/vitalmap/schemas/sse-events.schema.json",
+  "title": "SSEEvent",
+  "description": "Alle Server-Sent-Event-Typen vom Agent-Service an die Web-App.",
+  "oneOf": [
+    {
+      "title": "StatusEvent",
+      "type": "object",
+      "required": ["event", "data"],
+      "additionalProperties": false,
+      "properties": {
+        "event": { "const": "status" },
+        "data": {
+          "type": "object",
+          "required": ["message"],
+          "additionalProperties": false,
+          "properties": {
+            "message": { "type": "string" }
+          }
+        }
+      }
+    },
+    {
+      "title": "StacQueryEvent",
+      "type": "object",
+      "required": ["event", "data"],
+      "additionalProperties": false,
+      "properties": {
+        "event": { "const": "stac_query" },
+        "data": {
+          "type": "object",
+          "required": ["method", "url", "collections"],
+          "additionalProperties": false,
+          "properties": {
+            "method": { "type": "string", "enum": ["GET", "POST"] },
+            "url": { "type": "string", "format": "uri" },
+            "body": { "type": ["object", "null"] },
+            "collections": {
+              "type": "array",
+              "items": { "type": "object" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "ClarifyEvent",
+      "type": "object",
+      "required": ["event", "data"],
+      "additionalProperties": false,
+      "properties": {
+        "event": { "const": "clarify" },
+        "data": {
+          "type": "object",
+          "required": ["topic", "question", "options"],
+          "additionalProperties": false,
+          "properties": {
+            "topic": { "type": "string", "description": "Thema der Rückfrage." },
+            "question": { "type": "string", "description": "Rückfrage an den Nutzer." },
+            "options": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["id", "label", "bbox"],
+                "additionalProperties": false,
+                "properties": {
+                  "id": { "type": "string" },
+                  "label": { "type": "string" },
+                  "bbox": {
+                    "type": "array",
+                    "items": { "type": "number" },
+                    "minItems": 4,
+                    "maxItems": 4
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "MapActionEvent",
+      "type": "object",
+      "required": ["event", "data"],
+      "additionalProperties": false,
+      "properties": {
+        "event": { "const": "map_action" },
+        "data": {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": ["action", "params"],
+              "additionalProperties": false,
+              "properties": {
+                "action": { "const": "add_layer" },
+                "params": { "$ref": "./layer-spec.schema.json" }
+              }
+            },
+            {
+              "type": "object",
+              "required": ["action", "params"],
+              "additionalProperties": false,
+              "properties": {
+                "action": { "const": "zoom_to" },
+                "params": {
+                  "type": "object",
+                  "required": ["bbox"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "bbox": {
+                      "type": "array",
+                      "items": { "type": "number" },
+                      "minItems": 4,
+                      "maxItems": 4
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": ["action", "params"],
+              "additionalProperties": false,
+              "properties": {
+                "action": { "const": "remove_layer" },
+                "params": {
+                  "type": "object",
+                  "required": ["layer_id"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "layer_id": { "type": "string" }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": ["action", "params"],
+              "additionalProperties": false,
+              "properties": {
+                "action": { "const": "set_filter" },
+                "params": {
+                  "type": "object",
+                  "required": ["filters"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "filters": { "type": "object" }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": ["action", "params"],
+              "additionalProperties": false,
+              "properties": {
+                "action": { "const": "set_time" },
+                "params": {
+                  "type": "object",
+                  "required": ["datetime"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "datetime": { "type": "string" }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": ["action", "params"],
+              "additionalProperties": false,
+              "properties": {
+                "action": { "const": "open_details" },
+                "params": {
+                  "type": "object",
+                  "required": ["collection_id"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "collection_id": { "type": "string" }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "title": "TokenEvent",
+      "type": "object",
+      "required": ["event", "data"],
+      "additionalProperties": false,
+      "properties": {
+        "event": { "const": "token" },
+        "data": {
+          "type": "object",
+          "required": ["text"],
+          "additionalProperties": false,
+          "properties": {
+            "text": { "type": "string" }
+          }
+        }
+      }
+    },
+    {
+      "title": "DoneEvent",
+      "type": "object",
+      "required": ["event", "data"],
+      "additionalProperties": false,
+      "properties": {
+        "event": { "const": "done" },
+        "data": {
+          "type": "object",
+          "required": ["answer", "grounding"],
+          "additionalProperties": false,
+          "properties": {
+            "answer": {
+              "type": "string",
+              "description": "Geprüfter finaler Antworttext, der den gestreamten Entwurf in der Web-App ersetzt."
+            },
+            "grounding": {
+              "type": "object",
+              "required": ["grounded", "removed", "citations"],
+              "additionalProperties": false,
+              "properties": {
+                "grounded": { "type": "boolean" },
+                "removed": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "description": "Entfernte nicht belegte Aussagen oder IDs."
+                },
+                "citations": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "description": "Referenzierte STAC-Collection-IDs."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "ErrorEvent",
+      "type": "object",
+      "required": ["event", "data"],
+      "additionalProperties": false,
+      "properties": {
+        "event": { "const": "error" },
+        "data": {
+          "type": "object",
+          "required": ["type", "code", "message", "retryable"],
+          "additionalProperties": false,
+          "properties": {
+            "type": { "type": "string", "description": "Fehlerkategorie (z. B. agent_error, validation_error)." },
+            "code": {
+              "type": "string",
+              "enum": ["TIMEOUT", "UPSTREAM_UNAVAILABLE", "INVALID_REQUEST", "TOOL_FAILED"]
+            },
+            "message": { "type": "string" },
+            "retryable": { "type": "boolean" }
+          }
+        }
+      }
+    }
+  ]
+}

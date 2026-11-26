@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vitalstac.github.io/vitalmap/schemas/layer-spec.schema.json",
+  "title": "LayerSpecification",
+  "description": "Layer-Spezifikation für add_layer (Quelle, Zeitschritte, Legende).",
+  "type": "object",
+  "required": ["layer_id", "collection_id", "title", "representation_type", "source", "legend"],
+  "additionalProperties": false,
+  "properties": {
+    "layer_id": {
+      "type": "string",
+      "description": "Eindeutige ID des Layers in der Karte."
+    },
+    "collection_id": {
+      "type": "string",
+      "description": "ID der zugrundeliegenden STAC Collection."
+    },
+    "title": {
+      "type": "string",
+      "description": "Anzeigetitel des Layers."
+    },
+    "representation_type": {
+      "type": "string",
+      "enum": ["grid", "vector", "timeSeries"],
+      "description": "Darstellungsart: Kacheln (grid), Features (vector) oder Zeitreihe + Geometrie (timeSeries)."
+    },
+    "source": {
+      "type": "object",
+      "required": ["url"],
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Tile-URL (titiler-pgstac), GeoJSON/FlatGeobuf-URL oder CSV-URL."
+        },
+        "locations_url": {
+          "type": ["string", "null"],
+          "format": "uri",
+          "description": "Optional: GeoJSON-URL der Raumeinheiten bei tabellarischen Zeitreihen."
+        },
+        "join_column": {
+          "type": ["string", "null"],
+          "description": "Optional: Schlüsselspalte zur Verknüpfung von Zeitreihe und Geometrie (z. B. ags)."
+        }
+      }
+    },
+    "timesteps": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "Verfügbare Zeitschritte (ISO-8601) für den Zeitschieberegler oder null."
+    },
+    "opacity": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "default": 0.8
+    },
+    "legend": {
+      "type": "object",
+      "required": ["title", "unit", "source", "license"],
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "unit": { "type": ["string", "null"] },
+        "colormap": {
+          "type": ["string", "null"],
+          "enum": ["cividis", "viridis", "okabe-ito", null]
+        },
+        "rescale": {
+          "type": ["array", "null"],
+          "items": { "type": "number" },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "classes": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "object",
+            "required": ["value", "name"],
+            "properties": {
+              "value": { "type": ["number", "string"] },
+              "name": { "type": "string" },
+              "color_hint": { "type": "string" }
+            }
+          }
+        },
+        "source": { "type": ["string", "null"] },
+        "license": { "type": ["string", "null"] }
+      }
+    }
+  }
+}
