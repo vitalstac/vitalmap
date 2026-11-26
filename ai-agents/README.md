@@ -8,6 +8,11 @@ Format steht in `schemas/interfaces/` (Issue #2).
 
 | Pfad | Inhalt | Issue |
 | --- | --- | --- |
+| `vitalmap_agent/api.py` | FastAPI-Dienst, `POST /api/agent/chat` mit SSE, `GET /api/agent/health` | US-AGT-01 |
+| `vitalmap_agent/agent.py` | LangGraph-Graph (Modell ↔ Tools), Verlauf je Session, Grounding Stufe 1 | US-AGT-01, -04, -05 |
+| `vitalmap_agent/stac.py` | Tools `search_collections` und `get_collection` gegen die STAC API | US-AGT-01 |
+| `vitalmap_agent/cli.py` | Terminal-Client, zeigt die Ereignisse live | – |
+| `demo/` | Demo-Katalog mit 6 Beispieldatensätzen und Startskript für die Vorführung | – |
 | `vitalmap_agent/llm.py` | Anbindung des Sprachmodells (uniGPT oder Ollama) über `.env` | US-AGT-10 |
 | `eval/check_llm.py` | Verbindungs- und Tool-Calling-Test mit uniGPT | R3 |
 | `vitalmap_agent/resilience.py` | Zeitlimits, genau eine Wiederholung je Tool-Aufruf, `error`-Ereignis | #3 |
@@ -17,8 +22,15 @@ Format steht in `schemas/interfaces/` (Issue #2).
 | `eval/results/` | Berichte der Läufe (Markdown und JSON) | #8 |
 | `tests/` | Unit-Tests (pytest), ohne Netzwerk und ohne Sprachmodell | – |
 
-FastAPI-Endpunkt, LangGraph-Graph und STAC-Tools kommen mit den nächsten Pull
-Requests dazu.
+## Starten
+
+```bash
+uvicorn vitalmap_agent.api:app --port 8000          # braucht STAC_API_URL und LLM_* aus der .env
+python -m vitalmap_agent.cli "Welche Datensätze zeigen PM2.5 in NRW?"
+python demo/run_demo.py                             # alles zusammen mit Demo-Katalog
+```
+
+Die Vorführung ist in `demo/README.md` beschrieben.
 
 ## Einrichten
 

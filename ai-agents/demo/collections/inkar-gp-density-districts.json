@@ -1,0 +1,112 @@
+{
+  "type": "Collection",
+  "stac_version": "1.1.0",
+  "id": "inkar-gp-density-districts",
+  "title": "General practitioners per 100,000 inhabitants (INKAR), districts",
+  "license": "dl-de/by-2-0",
+  "health:representation_type": [
+    "vector"
+  ],
+  "health:scale": 250000,
+  "providers": [
+    {
+      "name": "BBSR (INKAR)",
+      "roles": [
+        "producer",
+        "licensor"
+      ]
+    },
+    {
+      "name": "BKG (VG250)",
+      "roles": [
+        "processor"
+      ]
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          5.87,
+          47.27,
+          15.04,
+          55.06
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2021-01-01T00:00:00Z",
+          "2021-12-31T23:59:59Z"
+        ]
+      ]
+    }
+  },
+  "assets": {
+    "data": {
+      "href": "https://data.example.org/inkar/gp_density.fgb",
+      "type": "application/vnd.flatgeobuf",
+      "roles": [
+        "data"
+      ],
+      "unit": "{GP}/10*5",
+      "table:columns": [
+        {
+          "name": "ags",
+          "type": "string"
+        },
+        {
+          "name": "gp_per_100k",
+          "type": "number"
+        }
+      ],
+      "classification:classes": [
+        {
+          "value": 1,
+          "name": "unter 60",
+          "color_hint": "440154"
+        },
+        {
+          "value": 2,
+          "name": "60 bis unter 65",
+          "color_hint": "3B528B"
+        },
+        {
+          "value": 3,
+          "name": "65 bis unter 70",
+          "color_hint": "21918C"
+        },
+        {
+          "value": 4,
+          "name": "70 bis unter 75",
+          "color_hint": "5EC962"
+        },
+        {
+          "value": 5,
+          "name": "75 und mehr",
+          "color_hint": "FDE725"
+        }
+      ]
+    }
+  },
+  "links": [
+    {
+      "rel": "license",
+      "href": "https://www.govdata.de/dl-de/by-2-0",
+      "title": "Datenlizenz Deutschland – Namensnennung – 2.0"
+    }
+  ],
+  "description": "Number of general practitioners (family doctors) per 100,000 inhabitants for German districts, from the INKAR database of the BBSR.",
+  "keywords": [
+    "general practitioners",
+    "Hausärzte",
+    "hausärztliche Versorgung",
+    "doctors",
+    "Ärzte",
+    "health care access",
+    "Versorgung",
+    "Landkreise",
+    "health-cat:health-care-access"
+  ]
+}

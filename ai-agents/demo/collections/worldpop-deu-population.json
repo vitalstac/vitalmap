@@ -1,0 +1,76 @@
+{
+  "type": "Collection",
+  "stac_version": "1.1.0",
+  "id": "worldpop-deu-population",
+  "title": "Population distribution Germany, 100 m, 2020",
+  "license": "CC-BY-4.0",
+  "health:representation_type": [
+    "grid"
+  ],
+  "health:spatial_resolution": 100,
+  "providers": [
+    {
+      "name": "WorldPop (University of Southampton)",
+      "roles": [
+        "producer"
+      ]
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          5.87,
+          47.27,
+          15.04,
+          55.06
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2020-01-01T00:00:00Z",
+          "2020-12-31T23:59:59Z"
+        ]
+      ]
+    }
+  },
+  "assets": {
+    "data": {
+      "href": "https://data.example.org/worldpop/deu_ppp_2020.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data"
+      ],
+      "bands": [
+        {
+          "name": "population",
+          "unit": "{persons}",
+          "data_type": "float32",
+          "statistics": {
+            "minimum": 0,
+            "maximum": 812.5
+          }
+        }
+      ]
+    }
+  },
+  "links": [
+    {
+      "rel": "license",
+      "href": "https://creativecommons.org/licenses/by/4.0/",
+      "title": "CC BY 4.0",
+      "type": "text/html"
+    }
+  ],
+  "description": "Estimated population counts per 100 m grid cell for Germany in 2020.",
+  "keywords": [
+    "population",
+    "Bevölkerung",
+    "Bevölkerungsverteilung",
+    "Einwohner",
+    "demography",
+    "health-cat:population"
+  ]
+}

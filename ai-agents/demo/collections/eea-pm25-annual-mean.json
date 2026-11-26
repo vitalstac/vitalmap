@@ -1,0 +1,105 @@
+{
+  "type": "Collection",
+  "stac_version": "1.1.0",
+  "id": "eea-pm25-annual-mean",
+  "title": "PM2.5 annual mean concentration (interpolated), Europe",
+  "description": "Interpolated annual mean PM2.5 concentrations (fine particulate matter, air quality) on a 1 km grid for Europe, 2020-2023.",
+  "license": "CC-BY-4.0",
+  "health:status": "completed",
+  "health:update_frequency": "annually",
+  "health:representation_type": [
+    "grid"
+  ],
+  "health:spatial_resolution": 1000,
+  "health:temporal_resolution": "P1Y",
+  "health:format": [
+    "COG"
+  ],
+  "providers": [
+    {
+      "name": "European Environment Agency",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.eea.europa.eu"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -31.3,
+          27.6,
+          44.8,
+          71.2
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2020-01-01T00:00:00Z",
+          "2023-12-31T23:59:59Z"
+        ]
+      ]
+    }
+  },
+  "item_assets": {
+    "data": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data"
+      ],
+      "data_type": "float32",
+      "unit": "ug/m3"
+    }
+  },
+  "renders": {
+    "pm25": {
+      "title": "PM2.5 annual mean",
+      "assets": [
+        "data"
+      ],
+      "rescale": [
+        [
+          0,
+          25
+        ]
+      ],
+      "colormap_name": "cividis"
+    }
+  },
+  "assets": {
+    "thumbnail": {
+      "href": "https://data.example.org/eea-pm25/thumbnail.png",
+      "type": "image/png",
+      "roles": [
+        "thumbnail"
+      ]
+    }
+  },
+  "links": [
+    {
+      "rel": "license",
+      "href": "https://creativecommons.org/licenses/by/4.0/",
+      "title": "CC BY 4.0",
+      "type": "text/html"
+    },
+    {
+      "rel": "via",
+      "href": "https://data.example.org/eea/pm25",
+      "title": "EEA Datahub"
+    }
+  ],
+  "keywords": [
+    "PM2.5",
+    "Feinstaub",
+    "fine particulate matter",
+    "air quality",
+    "Luftqualität",
+    "Luftverschmutzung",
+    "environment",
+    "health-cat:environmental-exposure"
+  ]
+}

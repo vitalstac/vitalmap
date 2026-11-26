@@ -1,0 +1,66 @@
+{
+  "type": "Collection",
+  "stac_version": "1.1.0",
+  "id": "osm-hospitals-nrw",
+  "title": "Hospital locations in North Rhine-Westphalia",
+  "license": "ODbL-1.0",
+  "health:representation_type": [
+    "vector"
+  ],
+  "providers": [
+    {
+      "name": "OpenStreetMap contributors",
+      "roles": [
+        "producer",
+        "licensor"
+      ]
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          5.87,
+          50.32,
+          9.47,
+          52.53
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2026-11-01T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "assets": {
+    "data": {
+      "href": "https://data.example.org/osm/hospitals_nrw.geojson",
+      "type": "application/geo+json",
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "links": [
+    {
+      "rel": "license",
+      "href": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "title": "ODbL 1.0"
+    }
+  ],
+  "description": "Locations of hospitals in North Rhine-Westphalia (NRW) from OpenStreetMap.",
+  "keywords": [
+    "hospitals",
+    "Krankenhäuser",
+    "Kliniken",
+    "health care",
+    "Versorgung",
+    "NRW",
+    "Nordrhein-Westfalen",
+    "health-cat:health-care-access"
+  ]
+}
