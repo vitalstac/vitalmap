@@ -13,25 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check if Docker Compose file exists
-        id: check
-        run: |
-          if [ -f docker/docker-compose.yml ]; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-            echo "docker/docker-compose.yml noch nicht auf diesem Branch – Smoke-Test übersprungen."
-          fi
-
-      - name: Prepare .env and start stack
-        if: steps.check.outputs.exists == 'true'
+      - name: Prepare .env and start stack      
         working-directory: docker
         run: |
           cp -n .env.example .env || true
           docker compose up -d
 
       - name: Wait for STAC API (HTTP 200 on /)
-        if: steps.check.outputs.exists == 'true'
         run: |
           for i in $(seq 1 30); do
             STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8080/ || true)
@@ -46,7 +34,6 @@ jobs:
           exit 1
 
       - name: Check STAC conformance (collection-search & filter)
-        if: steps.check.outputs.exists == 'true'
         run: |
           BODY=$(curl -sf http://127.0.0.1:8080/conformance)
           echo "$BODY" | grep -q "collection-search"
@@ -54,7 +41,6 @@ jobs:
           echo "Conformance check passed."
 
       - name: Wait for Tiler (HTTP 200 on /healthz)
-        if: steps.check.outputs.exists == 'true'
         run: |
           for i in $(seq 1 30); do
             STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8082/healthz || true)
@@ -69,11 +55,11 @@ jobs:
           exit 1
 
       - name: Dump container logs on failure
-        if: failure() && steps.check.outputs.exists == 'true'
+        if: failure() 
         working-directory: docker
         run: docker compose logs
 
       - name: Tear down stack
-        if: always() && steps.check.outputs.exists == 'true'
+        if: always() 
         working-directory: docker
         run: docker compose down -v
