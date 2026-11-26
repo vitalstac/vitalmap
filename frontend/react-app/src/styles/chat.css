@@ -1,0 +1,92 @@
+.chat-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .bubble-user {
+    align-self: flex-end;
+    max-width: 88%;
+    background: var(--brand);
+    color: var(--on-brand);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+  }
+  
+  .ai-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--ai);
+    border-radius: var(--radius);
+    padding: 14px;
+  }
+  .sources a {
+    color: var(--brand);
+    font-weight: 600;
+  }
+  
+  .stac {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 12px;
+  }
+  .stac-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+  .stac-head .plain {
+    color: var(--brand);
+    font-weight: 600;
+  }
+  .stac-actions {
+    white-space: nowrap;
+  }
+  .stac-code {
+    display: block;
+    font: 12px/1.5 ui-monospace, Menlo, monospace;
+    color: var(--muted);
+    word-break: break-all;
+  }
+
+  .examples h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .examples ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .chat-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--line-strong);
+    border-radius: 99px;
+    padding: 5px 5px 5px 18px;
+    background: var(--surface);
+  }
+  .chat-input:focus-within {
+    border-color: var(--brand);
+  }
+  .chat-input input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    padding: 6px 0;
+  }

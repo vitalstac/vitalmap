@@ -1,0 +1,27 @@
+@media (max-width: 1000px) {
+  .app, .app[data-results="closed"] {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto minmax(320px, 55vh) auto auto;
+    grid-template-areas: "header" "left" "map" "series" "results";
+    height: auto; min-height: 100%;
+  }
+  .header { 
+    grid-template-columns: 1fr; 
+    justify-items: center; 
+    padding: 10px 16px; 
+    gap: 8px; }
+  .header-right { 
+    justify-content: center; }
+
+  .panel { 
+    border-right: 0; 
+    border-bottom: 1px solid var(--line); 
+    max-height: 70vh; 
+  }
+  .layers { 
+    width: 180px; 
+  }
+  .overview { 
+    flex-direction: column; 
+  }
+}

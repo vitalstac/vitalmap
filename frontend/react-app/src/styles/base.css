@@ -1,0 +1,174 @@
+html {
+  height: 100%;
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  height: 100%;
+  font: 14px/1.45 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+#root {
+  height: 100%;
+}
+h1, h2, h3, p, ul, ol {
+  margin: 0;
+}
+ul, ol {
+  padding: 0;
+  list-style: none;
+}
+button, input, select {
+  font: inherit;
+  color: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  opacity: .45;
+  cursor: default;
+}
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+a {
+  color: var(--brand);
+}
+.muted {
+  color: var(--muted);
+}
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.app {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 330px minmax(0, 1fr) 290px;
+  grid-template-rows: 62px minmax(0, 1fr) auto;
+  grid-template-areas: "header header header" "left map results" "left series results";
+}
+.app[data-results="closed"] {
+  grid-template-columns: 330px minmax(0, 1fr) 48px;
+}
+.area-left {
+  grid-area: left;
+  min-height: 0;
+  display: flex;
+}
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+  min-height: 0;
+  overflow-y: auto;
+}
+.panel-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+.btn {
+  border: 1.5px solid var(--brand);
+  background: transparent;
+  color: var(--brand);
+  border-radius: 99px;
+  padding: 6px 16px;
+  font-weight: 600;
+}
+.btn:hover:not(:disabled) {
+  background: var(--tag);
+}
+.btn.small {
+  padding: 3px 14px;
+  font-size: 13px;
+}
+
+.chat-input .btn,
+.search-actions .btn,
+.result-actions .btn:first-child,
+.detail-actions .btn:first-child {
+  background: var(--brand);
+  color: var(--on-brand);
+}
+.chat-input .btn:hover:not(:disabled),
+.search-actions .btn:hover:not(:disabled),
+.result-actions .btn:first-child:hover:not(:disabled),
+.detail-actions .btn:first-child:hover:not(:disabled) {
+  filter: brightness(1.1);
+  background: var(--brand);
+}
+
+.plain {
+  border: 0;
+  background: none;
+  padding: 0;
+}
+.link-btn {
+  border: 0;
+  background: none;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tag {
+  align-self: flex-start;
+  background: var(--badge);
+  color: var(--badge-t);
+  border: 0;
+  border-radius: 99px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.chip {
+  border: 1px solid var(--brand);
+  color: var(--brand);
+  background: transparent;
+  border-radius: 99px;
+  padding: 6px 14px;
+}
+.chip:hover {
+  background: var(--tag);
+}
+
+.float {
+  position: absolute;
+  background: var(--surface);
+  border: 0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
+}
+.inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.inline input[type="checkbox"],
+.inline input[type="radio"] {
+  accent-color: var(--brand);
+}
+.note {
+  font-size: 13px;
+  color: var(--muted);
+}
