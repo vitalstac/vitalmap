@@ -1,0 +1,11 @@
+﻿POST spike-a 201
+POST spike-b 201
+POST spike-c 201
+Queryables: ['datetime', 'geometry', 'id']
+PASS Equality (text) | expected ['spike-a', 'spike-c'] | got ['spike-a', 'spike-c']
+PASS Equality (json) | expected ['spike-b'] | got ['spike-b']
+PASS AND (text) | expected ['spike-a'] | got ['spike-a']
+PASS OR (text) | expected ['spike-b', 'spike-c'] | got ['spike-b', 'spike-c']
+PASS No match | expected [] | got []
+PASS Free text q | expected ['spike-c'] | got ['spike-c']
+PASS IN (optional) | expected ['spike-a', 'spike-b'] | got ['spike-a', 'spike-b']

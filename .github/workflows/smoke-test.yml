@@ -1,0 +1,65 @@
+name: CI - Docker Smoke Test
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+
+jobs:
+  smoke-test:
+    name: Docker Compose Smoke Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare .env and start stack      
+        working-directory: docker
+        run: |
+          cp -n .env.example .env || true
+          docker compose up -d
+
+      - name: Wait for STAC API (HTTP 200 on /)
+        run: |
+          for i in $(seq 1 30); do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8080/ || true)
+            if [ "$STATUS" = "200" ]; then
+              echo "STAC API is up (HTTP 200)"
+              exit 0
+            fi
+            echo "Waiting for STAC API... ($i/30, last status: $STATUS)"
+            sleep 2
+          done
+          echo "STAC API did not become ready in time."
+          exit 1
+
+      - name: Check STAC conformance (collection-search & filter)
+        run: |
+          BODY=$(curl -sf http://127.0.0.1:8080/conformance)
+          echo "$BODY" | grep -q "collection-search"
+          echo "$BODY" | grep -q "filter"
+          echo "Conformance check passed."
+
+      - name: Wait for Tiler (HTTP 200 on /healthz)
+        run: |
+          for i in $(seq 1 30); do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8082/healthz || true)
+            if [ "$STATUS" = "200" ]; then
+              echo "Tiler is up (HTTP 200)"
+              exit 0
+            fi
+            echo "Waiting for Tiler... ($i/30, last status: $STATUS)"
+            sleep 2
+          done
+          echo "Tiler did not become ready in time."
+          exit 1
+
+      - name: Dump container logs on failure
+        if: failure() 
+        working-directory: docker
+        run: docker compose logs
+
+      - name: Tear down stack
+        if: always() 
+        working-directory: docker
+        run: docker compose down -v
